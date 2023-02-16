@@ -10,3 +10,5 @@ class User(AbstractBaseUser):
     age = models.PositiveIntegerField();
     email = models.EmailField(unique=True);
 
+    USERNAME_FIELD = 'email'
+
