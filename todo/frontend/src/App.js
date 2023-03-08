@@ -7,6 +7,7 @@ import Foo from './components/Footer';
 import MainMenu from './components/Menu';
 import ProjectList from './components/Projects';
 import ToDoList from './components/ToDo';
+import { BrowserRouter, Route } from "react-router-dom"
 
 class App extends React.Component {
     constructor(props){
@@ -46,11 +47,13 @@ class App extends React.Component {
     render() {
       return (
         <div>
-            < MainMenu />
-            < UserList users={this.state.users}/>
-            < ProjectList projects={this.state.projects}/>
-            < ToDoList todos={this.state.todos}/>
+          <BrowserRouter>
+            <Route exact path='/' component={() => < MainMenu />} />
+            <Route exact path='/users' component={() => <UserList users={this.state.users}/>} />
+            <Route exact path='/projects' component={() => < ProjectList projects={this.state.projects}/>} />
+            <Route exact path='/todos' component={() => < ToDoList todos={this.state.todos}/>} />
             < Foo />
+          </BrowserRouter>
         </div>
       );
     };
