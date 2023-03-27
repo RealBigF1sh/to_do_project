@@ -9,6 +9,8 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=64);
     age = models.PositiveIntegerField();
     email = models.EmailField(unique=True);
+    staff = models.BooleanField(default=True);
+    superuser = models.BooleanField(default=False);
 
     USERNAME_FIELD = 'email'
 
