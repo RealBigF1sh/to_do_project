@@ -23,6 +23,7 @@ class Query(graphene.ObjectType):
     all_projects = graphene.List(ProjectType)
     all_todos = graphene.List(ToDoType)
 
+
     def resolve_all_projects(root, info):
         return Project.objects.all()
     
