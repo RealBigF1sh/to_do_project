@@ -1,10 +1,14 @@
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, generics
 from .models import User
-from .serializer import UserModelSerializer
+from .serializer import UserModelSerializer, UserModelSerializerBase
 
-class UserCustomViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
+class UserCustomViewSet(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
-    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+
+    def get_serializer_class(self):
+        if self.request.version == '2.0':
+            return UserModelSerializerBase
+        return UserModelSerializer
     

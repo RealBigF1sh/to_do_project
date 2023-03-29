@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'to_do',
     'users',
@@ -135,8 +136,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# from rest_framework.authentication import TokenAuthentication
+#from rest_framework.versioning import URLPathVersioning
 REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'DEFAULT_PERMISSION_CLASSES' : [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
