@@ -23,6 +23,7 @@ import users.urls
 from rest_framework.authtoken import views
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from graphene_django.views import GraphQLView
 
 router = DefaultRouter()
 router.register('users', UserCustomViewSet)
@@ -43,6 +44,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
     re_path(r'^api/(?P<version>\d.\d)/users/$', UserCustomViewSet.as_view()),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls') ),
