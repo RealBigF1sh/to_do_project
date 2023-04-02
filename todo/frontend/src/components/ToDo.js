@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToDoItem = ({todo}) => {
+const ToDoItem = ({todo, deleteToDo}) => {
     return (
         <tr>
             <td>
@@ -14,6 +14,9 @@ const ToDoItem = ({todo}) => {
             </td>
             <td>
                 {todo.updated_at}
+            </td>
+            <td>
+                <button onClick={()=>deleteToDo(todo.id)} type='button'>Delete</button>
             </td>
         </tr>
 
