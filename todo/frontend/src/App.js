@@ -44,14 +44,30 @@ class App extends React.Component {
 
     }
 
+    deleteProject(id) {
+      const headers = this.get_headers()
+      axios.delete("http://127.0.0.1:8000/api/project/${id}", {headers})
+          .then(response => {
+              this.setState({projects: this.state.projects.filter((project)=>project.id !==id)})
+          }).catch(error => console.log(error))
+    }
+
+    deleteToDo(id) {
+      const headers = this.get_headers()
+      axios.delete("http://127.0.0.1:8000/api/to_do/${id}", {headers})
+          .then(response => {
+              this.setState({todos: this.state.todos.filter((todo)=>todo.id !==id)})
+          }).catch(error => console.log(error))
+  }
+
     render() {
       return (
         <div>
           <BrowserRouter>
             <Route exact path='/' component={() => < MainMenu />} />
             <Route exact path='/users' component={() => <UserList users={this.state.users}/>} />
-            <Route exact path='/projects' component={() => < ProjectList projects={this.state.projects}/>} />
-            <Route exact path='/todos' component={() => < ToDoList todos={this.state.todos}/>} />
+            <Route exact path='/projects' component={() => < ProjectList projects={this.state.projects} deleteProject={(id)=>this.deleteProject(id)}/>} />
+            <Route exact path='/todos' component={() => < ToDoList todos={this.state.todos} deleteToDo={(id)=>this.deleteToDo(id)}/>} />
             < Foo />
           </BrowserRouter>
         </div>

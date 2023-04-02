@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import UserCustomViewSet
+from .views import UserMyViewSet
 
 appname = 'users'
 urlpatterns = [
-    path('', UserCustomViewSet.as_view()),
+    path('', UserMyViewSet.as_view()),
 ]

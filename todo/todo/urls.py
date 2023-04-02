@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from rest_framework import permissions
-from users.views import UserCustomViewSet
+from users.views import UserCustomViewSet, UserMyViewSet
 from to_do.views import ProjectFilterViewSet, ToDoModelViewSet
 import users.urls
 from rest_framework.authtoken import views
@@ -44,8 +44,9 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path('api/', include(router.urls)),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
-    re_path(r'^api/(?P<version>\d.\d)/users/$', UserCustomViewSet.as_view()),
+    re_path(r'^api/(?P<version>\d.\d)/users/$', UserMyViewSet.as_view()),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls') ),
     re_path(r'^swagger/(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
